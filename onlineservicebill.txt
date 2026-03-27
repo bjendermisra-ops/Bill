@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Online Service Bill Generator | SmartBills.Pro</title>
+  <!-- Google Fonts & Font Awesome -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- html2canvas & jspdf -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f0f9f4 0%, #e8f0f5 100%);
+      color: #1a2c3e;
+      scroll-behavior: smooth;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* navbar - same as original */
+    .navbar {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(46, 125, 96, 0.2);
+    }
+
+    .nav-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 14px 24px;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #0f4c5f, #2c8e6e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .logo i {
+      background: none;
+      color: #2c8e6e;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2c3e44;
+      transition: 0.3s;
+    }
+
+    .nav-links a:hover, .nav-links a.active {
+      color: #1e6f5c;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #1e6f5c, #2c8e6e);
+      border: none;
+      padding: 10px 28px;
+      border-radius: 40px;
+      font-weight: 700;
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+      box-shadow: 0 4px 12px rgba(30,111,92,0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(30,111,92,0.4);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 2px solid #1e6f5c;
+      padding: 8px 24px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1e6f5c;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #1e6f5c;
+      color: white;
+    }
+
+    /* Hero Section for Online Service */
+    .hero {
+      padding: 50px 0 40px;
+      background: linear-gradient(145deg, #eef5f9 0%, #ffffff 100%);
+    }
+
+    .hero-badge {
+      background: linear-gradient(135deg, #1e6f5c20, #2c8e6e20);
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      color: #1e6f5c;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      background: linear-gradient(120deg, #134b5e, #2b8c6e);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 20px;
+    }
+
+    /* Main Bill Panel - Online Service Premium */
+    .bill-panel {
+      background: white;
+      border-radius: 40px;
+      padding: 40px;
+      margin: 40px 0;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      transition: all 0.3s;
+    }
+
+    .service-header {
+      background: linear-gradient(135deg, #1e6f5c08, #2c8e6e08);
+      border-radius: 28px;
+      padding: 20px;
+      margin-bottom: 30px;
+      border-left: 5px solid #1e6f5c;
+    }
+
+    .form-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin-bottom: 28px;
+    }
+
+    .input-group {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .input-group label {
+      font-weight: 700;
+      display: block;
+      margin-bottom: 8px;
+      color: #1e5a4a;
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 18px;
+      border-radius: 28px;
+      border: 1.5px solid #d0e2da;
+      font-family: inherit;
+      transition: 0.2s;
+      font-size: 0.95rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: #1e6f5c;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(30,111,92,0.1);
+    }
+
+    /* Service Items Table */
+    .table-wrapper {
+      overflow-x: auto;
+      margin: 25px 0;
+      border-radius: 24px;
+      border: 1px solid #e2f0ea;
+      background: white;
+    }
+
+    .service-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .service-table th {
+      background: #1e6f5c;
+      color: white;
+      padding: 14px 12px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .service-table td {
+      padding: 12px 10px;
+      text-align: center;
+      border-bottom: 1px solid #e2f0ea;
+    }
+
+    .service-table input {
+      width: 100%;
+      min-width: 100px;
+      padding: 8px 12px;
+      border-radius: 20px;
+      border: 1px solid #cbdcd4;
+      text-align: center;
+    }
+
+    .remove-row {
+      background: #ff6b6b;
+      border: none;
+      color: white;
+      padding: 6px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+
+    .remove-row:hover {
+      background: #ff5252;
+      transform: scale(0.95);
+    }
+
+    .add-service-btn {
+      background: #eef3f0;
+      border: 2px dashed #2c8e6e;
+      padding: 12px 24px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 15px;
+      width: 100%;
+      transition: 0.2s;
+    }
+
+    .add-service-btn:hover {
+      background: #e0f0e8;
+      border-color: #1e6f5c;
+    }
+
+    /* Live Bill Preview */
+    .live-bill-preview {
+      background: #fefef7;
+      border-radius: 28px;
+      padding: 30px;
+      margin-top: 35px;
+      border: 2px solid #cde3db;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    }
+
+    .preview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      border-bottom: 2px dashed #2c8e6e;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+    }
+
+    .download-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .download-btn {
+      background: #2c3e50;
+      color: white;
+      padding: 8px 20px;
+      border-radius: 32px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+      font-size: 0.9rem;
+    }
+
+    .download-btn.pdf { background: #e74c3c; }
+    .download-btn.png { background: #27ae60; }
+    .download-btn.jpg { background: #f39c12; }
+
+    .download-btn:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.05);
+    }
+
+    .bill-content {
+      font-family: 'Inter', monospace;
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+    }
+
+    /* Service Templates */
+    .templates-section {
+      margin: 30px 0;
+    }
+
+    .templates-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .template-card {
+      background: white;
+      border-radius: 20px;
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: 0.2s;
+      border: 1px solid #e0efe8;
+    }
+
+    .template-card:hover {
+      transform: translateY(-3px);
+      border-color: #1e6f5c;
+      box-shadow: 0 8px 20px rgba(30,111,92,0.1);
+    }
+
+    .template-card i {
+      font-size: 2rem;
+      color: #1e6f5c;
+      margin-bottom: 10px;
+    }
+
+    /* Footer same */
+    .footer-policies {
+      background: #0b2b2a;
+      color: white;
+      padding: 40px 0 20px;
+      margin-top: 60px;
+    }
+
+    .policy-links {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .policy-links a {
+      color: #bcd9d2;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .policy-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      text-align: center;
+      font-size: 0.8rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.8rem; }
+      .bill-panel { padding: 24px; }
+      .service-table th, .service-table td { font-size: 0.8rem; padding: 8px; }
+    }
+
+    .badge-service {
+      background: #e0f2e9;
+      display: inline-block;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+
+    .total-amount {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #1e6f5c;
+    }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="logo"><i class="fas fa-file-invoice-dollar"></i> SmartBills<span style="color:#1e6f5c;">.Pro</span></div>
+    <ul class="nav-links">
+      <li><a href="/">Home</a></li>
+      
+       <li><a href="kiranastorebill.html">Kirana Bill</a></li>
+       <li><a href="Classesbill.html">Classes Bill</a></li>
+       <li><a href="Clothingbill.html">Clothing Bill</a></li>
+      <li><a href="Electronicbill.html">Electronic Bill</a></li>
+      <li><a href="Vegetablebill.html">Vegetable Bill</a></li>
+      <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</a></li>
+    </ul>
+    <button class="btn-primary" id="scrollToBillBtn"><i class="fas fa-receipt"></i> बिल बनाएं</button>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-badge">
+        <i class="fas fa-globe"></i> BEST ONLINE SERVICE BILL TOOL
+      </div>
+      <h1>Online Service Bill Generator <br><span style="font-size: 1.8rem;">वेबसाइट, डिजिटल मार्केटिंग, कंसल्टिंग, IT सेवाएं</span></h1>
+      <p style="font-size: 1.1rem; max-width: 800px;">प्रोफेशनल इनवॉइस बनाएं सेकंडों में। टेबल में सर्विस एड करें, लाइव प्रीव्यू देखें, PDF/PNG/JPG डाउनलोड करें। 100% फ्री!</p>
+    </div>
+  </section>
+
+  <div class="container">
+    <!-- Service Templates for Quick Fill -->
+    <div class="templates-section">
+      <h3 style="margin-bottom: 15px;"><i class="fas fa-bolt"></i> प्रीमियम सर्विस टेम्पलेट्स (एक क्लिक में सेट)</h3>
+      <div class="templates-grid" id="templatesGrid">
+        <!-- templates loaded via JS -->
+      </div>
+    </div>
+
+    <!-- Main Bill Generator Panel -->
+    <div class="bill-panel" id="generatorSection">
+      <div class="service-header">
+        <span class="badge-service"><i class="fas fa-chart-line"></i> ऑनलाइन सर्विस बिल - टेबल व्यू</span>
+        <p style="margin-top: 12px; color: #2c5a4a;">नीचे दी गई टेबल में सर्विस, मात्रा (घंटे/प्रोजेक्ट), कीमत भरें और लाइव बिल देखें</p>
+      </div>
+
+      <!-- Business & Client Details -->
+      <div class="form-row">
+        <div class="input-group">
+          <label><i class="fas fa-building"></i> कंपनी / फ्रीलांसर नाम</label>
+          <input type="text" id="businessName" value="WebCraft Solutions Pvt. Ltd." placeholder="आपका व्यवसाय नाम">
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-user"></i> ग्राहक का नाम</label>
+          <input type="text" id="customerName" value="डिजिटल मार्केटिंग इंडिया" placeholder="ग्राहक नाम">
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-calendar"></i> बिल तारीख</label>
+          <input type="date" id="billDate" value="2025-03-26">
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-hashtag"></i> बिल नंबर</label>
+          <input type="text" id="billNumber" value="OS-2025-001">
+        </div>
+      </div>
+
+      <!-- Service Items Table -->
+      <div class="table-wrapper">
+        <table class="service-table" id="servicesTable">
+          <thead>
+            <tr><th>सर्विस का नाम</th><th>मात्रा (घंटे/प्रोजेक्ट)</th><th>दर (₹)</th><th>कुल (₹)</th><th style="width:70px"></th></tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- dynamic rows -->
+          </tbody>
+        </table>
+      </div>
+      <button class="add-service-btn" id="addServiceBtn"><i class="fas fa-plus-circle"></i> + नई सर्विस जोड़ें</button>
+
+      <!-- Extra Fields for Online Service -->
+      <div class="form-row" style="margin-top: 25px;">
+        <div class="input-group">
+          <label><i class="fas fa-percent"></i> GST % (वैकल्पिक)</label>
+          <input type="number" id="gstPercent" value="5" step="0.5" placeholder="GST">
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-sticky-note"></i> अतिरिक्त नोट / टर्म्स</label>
+          <input type="text" id="extraNote" value="धन्यवाद! सभी सेवाएं 24 घंटे में डिलीवर | Payment within 7 days">
+        </div>
+        <div class="input-group">
+          <label><i class="fas fa-tag"></i> डिस्काउंट (₹)</label>
+          <input type="number" id="discountAmount" value="0" placeholder="डिस्काउंट">
+        </div>
+      </div>
+
+      <!-- LIVE BILL PREVIEW with Download -->
+      <div class="live-bill-preview" id="livePreviewContainer">
+        <div class="preview-header">
+          <h3><i class="fas fa-eye"></i> लाइव बिल प्रीव्यू (ऑनलाइन सर्विस इनवॉइस)</h3>
+          <div class="download-buttons">
+            <button class="download-btn pdf" id="downloadPDFBtn"><i class="fas fa-file-pdf"></i> PDF</button>
+            <button class="download-btn png" id="downloadPNGBtn"><i class="fas fa-image"></i> PNG</button>
+            <button class="download-btn jpg" id="downloadJPGBtn"><i class="fas fa-camera"></i> JPG</button>
+          </div>
+        </div>
+        <div id="billPreviewContent" class="bill-content">
+          <div style="text-align:center; padding:30px;">बिल लोड हो रहा है...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="footer-policies">
+  <div class="container policy-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <a href="#">Refund Policy</a>
+    <a href="#">Shipping Policy</a>
+    <a href="#">Cancellation Policy</a>
+  </div>
+  <div class="container copyright">© 2025 SmartBills.Pro | Best Online Service Bill Tool | 100% Free | PDF/PNG/JPG Download</div>
+</footer>
+
+<script>
+  // Service Items Data
+  let services = [
+    { name: "वेबसाइट डिजाइन और डेवलपमेंट", qty: 1, price: 8500 },
+    { name: "SEO ऑप्टिमाइजेशन (मंथली)", qty: 1, price: 5000 },
+    { name: "सोशल मीडिया मैनेजमेंट", qty: 1, price: 3500 }
+  ];
+
+  const tableBody = document.getElementById("tableBody");
+  const businessInput = document.getElementById("businessName");
+  const customerInput = document.getElementById("customerName");
+  const billDateInput = document.getElementById("billDate");
+  const billNumberInput = document.getElementById("billNumber");
+  const gstPercentInput = document.getElementById("gstPercent");
+  const extraNoteInput = document.getElementById("extraNote");
+  const discountInput = document.getElementById("discountAmount");
+  const previewDiv = document.getElementById("billPreviewContent");
+
+  function renderTable() {
+    tableBody.innerHTML = "";
+    services.forEach((service, idx) => {
+      const row = document.createElement("tr");
+      row.innerHTML = `
+        <td><input type="text" class="service-name" value="${escapeHtml(service.name)}" data-idx="${idx}" style="min-width:180px;"></td>
+        <td><input type="number" class="service-qty" value="${service.qty}" step="0.5" data-idx="${idx}" style="width:100px;"></td>
+        <td><input type="number" class="service-price" value="${service.price}" step="100" data-idx="${idx}" style="width:110px;"></td>
+        <td class="service-total">₹${(service.qty * service.price).toFixed(2)}</td>
+        <td><button class="remove-row" data-idx="${idx}"><i class="fas fa-trash-alt"></i> हटाएं</button></td>
+      `;
+      tableBody.appendChild(row);
+    });
+    attachTableEvents();
+    updateLiveBill();
+  }
+
+  function escapeHtml(str) {
+    return str;
+  }
+
+  function attachTableEvents() {
+    document.querySelectorAll(".service-name").forEach(inp => {
+      inp.removeEventListener("input", handleServiceChange);
+      inp.addEventListener("input", handleServiceChange);
+    });
+    document.querySelectorAll(".service-qty").forEach(inp => {
+      inp.removeEventListener("input", handleServiceChange);
+      inp.addEventListener("input", handleServiceChange);
+    });
+    document.querySelectorAll(".service-price").forEach(inp => {
+      inp.removeEventListener("input", handleServiceChange);
+      inp.addEventListener("input", handleServiceChange);
+    });
+    document.querySelectorAll(".remove-row").forEach(btn => {
+      btn.removeEventListener("click", handleRemoveService);
+      btn.addEventListener("click", handleRemoveService);
+    });
+  }
+
+  function handleServiceChange(e) {
+    const idx = e.target.getAttribute("data-idx");
+    if (idx !== null) {
+      const nameInput = document.querySelector(`.service-name[data-idx='${idx}']`);
+      const qtyInput = document.querySelector(`.service-qty[data-idx='${idx}']`);
+      const priceInput = document.querySelector(`.service-price[data-idx='${idx}']`);
+      if (nameInput && qtyInput && priceInput) {
+        services[idx].name = nameInput.value;
+        services[idx].qty = parseFloat(qtyInput.value) || 0;
+        services[idx].price = parseFloat(priceInput.value) || 0;
+      }
+    }
+    updateTotalsInTable();
+    updateLiveBill();
+  }
+
+  function handleRemoveService(e) {
+    const idx = e.currentTarget.getAttribute("data-idx");
+    if (idx !== null) {
+      services.splice(parseInt(idx), 1);
+      renderTable();
+    }
+  }
+
+  function updateTotalsInTable() {
+    const rows = tableBody.querySelectorAll("tr");
+    rows.forEach((row, idx) => {
+      if (services[idx]) {
+        const totalCell = row.querySelector(".service-total");
+        const totalAmt = services[idx].qty * services[idx].price;
+        if (totalCell) totalCell.innerText = `₹${totalAmt.toFixed(2)}`;
+      }
+    });
+  }
+
+  function getBillData() {
+    let items = services.map(s => ({
+      name: s.name,
+      quantity: s.qty,
+      price: s.price,
+      total: s.qty * s.price
+    }));
+    let subtotal = items.reduce((sum, i) => sum + i.total, 0);
+    let discount = parseFloat(discountInput.value) || 0;
+    let afterDiscount = subtotal - discount;
+    let gstPercent = parseFloat(gstPercentInput.value) || 0;
+    let gstAmount = afterDiscount * (gstPercent / 100);
+    let grandTotal = afterDiscount + gstAmount;
+    return { items, subtotal, discount, afterDiscount, gstPercent, gstAmount, grandTotal };
+  }
+
+  function updateLiveBill() {
+    const business = businessInput.value || "Online Service Provider";
+    const customer = customerInput.value || "Client";
+    const date = billDateInput.value || new Date().toISOString().slice(0,10);
+    const billNo = billNumberInput.value || "OS-INV";
+    const extraNote = extraNoteInput.value || "";
+    const { items, subtotal, discount, afterDiscount, gstPercent, gstAmount, grandTotal } = getBillData();
+
+    let itemsHtml = `<table style="width:100%; border-collapse: collapse; margin:20px 0; font-family: 'Inter', monospace;">
+      <thead><tr style="background:#1e6f5c; color:white;"><th style="padding:12px;">सर्विस विवरण</th><th>मात्रा</th><th>दर (₹)</th><th>कुल (₹)</th></tr></thead><tbody>`;
+    items.forEach(it => {
+      itemsHtml += `<tr><td style="padding:10px; border-bottom:1px solid #e0e0e0;">${it.name}</td><td style="text-align:center;">${it.quantity}</td><td style="text-align:center;">₹${it.price.toFixed(2)}</td><td style="text-align:center;">₹${it.total.toFixed(2)}</td></tr>`;
+    });
+    itemsHtml += `</tbody></table>`;
+
+    const billHtml = `
+      <div style="max-width:100%;">
+        <div style="text-align:center; border-bottom:2px dashed #2c8e6e; margin-bottom:20px; padding-bottom:15px;">
+          <h2 style="color:#1e6f5c; margin-bottom:8px;">${business}</h2>
+          <p><strong>📄 बिल नं:</strong> ${billNo} &nbsp;|&nbsp; <strong>📅 तारीख:</strong> ${date}</p>
+          <p><strong>👤 ग्राहक:</strong> ${customer}</p>
+          <p><i class="fas fa-laptop-code"></i> ऑनलाइन सर्विस इनवॉइस</p>
+        </div>
+        ${itemsHtml}
+        <div style="text-align:right; margin-top:20px; font-size:1rem;">
+          <div>उप-कुल: ₹${subtotal.toFixed(2)}</div>
+          ${discount > 0 ? `<div style="color:#e67e22;">डिस्काउंट: - ₹${discount.toFixed(2)}</div>` : ''}
+          ${discount > 0 ? `<div>डिस्काउंट के बाद: ₹${afterDiscount.toFixed(2)}</div>` : ''}
+          ${gstPercent > 0 ? `<div>GST (${gstPercent}%): ₹${gstAmount.toFixed(2)}</div>` : ''}
+          <div style="font-size:1.5rem; font-weight:800; border-top:2px solid #1e6f5c; margin-top:10px; padding-top:10px; color:#1e6f5c;">कुल भुगतान: ₹${grandTotal.toFixed(2)}</div>
+          <div style="margin-top:15px; font-size:0.85rem; color:#2c5a4a;"><i class="fas fa-info-circle"></i> ${extraNote}</div>
+          <div style="margin-top:12px; font-size:0.7rem; color:#6c8b7c;">✨ SmartBills.Pro - ऑनलाइन सर्विस बिल जनरेटर | मुफ्त & प्रोफेशनल</div>
+        </div>
+      </div>
+    `;
+    previewDiv.innerHTML = billHtml;
+  }
+
+  // Add new service row
+  document.getElementById("addServiceBtn").addEventListener("click", () => {
+    services.push({ name: "नई ऑनलाइन सर्विस", qty: 1, price: 999 });
+    renderTable();
+  });
+
+  // Live update on all input fields
+  const liveFields = [businessInput, customerInput, billDateInput, billNumberInput, gstPercentInput, extraNoteInput, discountInput];
+  liveFields.forEach(field => {
+    field.addEventListener("input", () => updateLiveBill());
+  });
+
+  // Templates for Online Services
+  const templates = [
+    { name: "💻 वेबसाइट डिजाइन", icon: "fas fa-code", services: [{ name: "वेबसाइट डिजाइन (फ्रीलांस)", qty: 1, price: 12000 }, { name: "डोमेन + होस्टिंग सेटअप", qty: 1, price: 2500 }], business: "WebCraft Pro" },
+    { name: "📱 डिजिटल मार्केटिंग", icon: "fas fa-chart-line", services: [{ name: "सोशल मीडिया मैनेजमेंट", qty: 1, price: 8000 }, { name: "Google Ads कैंपेन", qty: 1, price: 5000 }], business: "DigitalBoost Agency" },
+    { name: "🎓 ऑनलाइन कोचिंग", icon: "fas fa-chalkboard-user", services: [{ name: "वीडियो कोर्स डेवलपमेंट", qty: 1, price: 15000 }, { name: "लाइव क्लास सपोर्ट", qty: 1, price: 3000 }], business: "EduTech Online" },
+    { name: "🛠️ IT कंसल्टिंग", icon: "fas fa-microchip", services: [{ name: "IT कंसल्टेंसी (घंटा)", qty: 5, price: 1500 }, { name: "सिस्टम ऑडिट", qty: 1, price: 4000 }], business: "TechSol Consultants" },
+    { name: "🎨 ग्राफिक डिजाइन", icon: "fas fa-palette", services: [{ name: "लोगो डिजाइन", qty: 1, price: 2500 }, { name: "ब्रोशर/पोस्टर डिजाइन", qty: 2, price: 1200 }], business: "CreativeDesk Studio" }
+  ];
+
+  const templatesGrid = document.getElementById("templatesGrid");
+  templates.forEach(tmpl => {
+    const card = document.createElement("div");
+    card.className = "template-card";
+    card.innerHTML = `<i class="${tmpl.icon}"></i><div style="font-weight:600;">${tmpl.name}</div><small style="color:#5f8b7c;">क्लिक करें</small>`;
+    card.addEventListener("click", () => {
+      services = JSON.parse(JSON.stringify(tmpl.services));
+      businessInput.value = tmpl.business;
+      renderTable();
+      updateLiveBill();
+      document.getElementById("generatorSection").scrollIntoView({ behavior: "smooth" });
+    });
+    templatesGrid.appendChild(card);
+  });
+
+  // Download Functions
+  async function captureBill() {
+    const element = document.getElementById("billPreviewContent");
+    if (!element) return null;
+    const originalBg = element.style.backgroundColor;
+    element.style.backgroundColor = "white";
+    const canvas = await html2canvas(element, { scale: 2.5, backgroundColor: "#ffffff", logging: false });
+    element.style.backgroundColor = originalBg;
+    return canvas;
+  }
+
+  document.getElementById("downloadPNGBtn").addEventListener("click", async () => {
+    const canvas = await captureBill();
+    if(canvas) { const link = document.createElement("a"); link.download = "Online_Service_Bill.png"; link.href = canvas.toDataURL("image/png"); link.click(); }
+    else alert("बिल कैप्चर नहीं हो सका");
+  });
+  document.getElementById("downloadJPGBtn").addEventListener("click", async () => {
+    const canvas = await captureBill();
+    if(canvas) { const link = document.createElement("a"); link.download = "Online_Service_Bill.jpg"; link.href = canvas.toDataURL("image/jpeg", 0.95); link.click(); }
+  });
+  document.getElementById("downloadPDFBtn").addEventListener("click", async () => {
+    const canvas = await captureBill();
+    if(canvas) {
+      const { jsPDF } = window.jspdf;
+      const imgData = canvas.toDataURL("image/png");
+      const pdf = new jsPDF("p", "mm", "a4");
+      const imgWidth = 190;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+      pdf.save("Online_Service_Invoice.pdf");
+    }
+  });
+
+  document.getElementById("scrollToBillBtn").addEventListener("click", () => document.getElementById("generatorSection").scrollIntoView({ behavior: "smooth" }));
+
+  // Initialize
+  renderTable();
+  updateLiveBill();
+</script>
+</body>
+</html>

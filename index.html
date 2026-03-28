@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-  <title>Smart Bills Pro | मुफ्त बिल जनरेटर - टेबल व्यू, PDF/PNG/JPG डाउनलोड</title>
+  <title>Smart Bills Pro | डार्क थीम प्रो इनवॉइस</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -11,10 +11,11 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    /* DARK THEME CORE */
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #f0f9f4 0%, #e8f0f5 100%);
-      color: #1a2c3e;
+      background: #0a0a0f;
+      color: #e2e2e9;
       scroll-behavior: smooth;
     }
 
@@ -22,13 +23,13 @@
 
     /* NAVBAR */
     .navbar {
-      background: rgba(255,255,255,0.98);
-      backdrop-filter: blur(8px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+      background: rgba(15, 15, 22, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid rgba(46,125,96,0.2);
+      border-bottom: 1px solid #2a2a35;
     }
     .nav-container {
       display: flex;
@@ -42,25 +43,24 @@
     .logo {
       font-size: 1.8rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #0f4c5f, #2c8e6e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #ffffff;
     }
-    .logo i { background: none; color: #2c8e6e; }
+    .logo span { color: #6c63ff; }
+    .logo i { color: #6c63ff; }
+    
     .nav-links { display: flex; gap: 20px; list-style: none; flex-wrap: wrap; }
     .nav-links a {
       text-decoration: none;
       font-weight: 600;
-      color: #2c3e44;
+      color: #a5a5b8;
       transition: 0.3s;
       cursor: pointer;
       font-size: 0.9rem;
     }
-    .nav-links a:hover { color: #1e6f5c; }
+    .nav-links a:hover { color: #6c63ff; }
 
     .btn-primary {
-      background: linear-gradient(135deg, #1e6f5c, #2c8e6e);
+      background: #6c63ff;
       border: none;
       padding: 10px 28px;
       border-radius: 40px;
@@ -68,17 +68,18 @@
       color: white;
       cursor: pointer;
       transition: 0.3s;
-      box-shadow: 0 4px 12px rgba(30,111,92,0.3);
+      box-shadow: 0 4px 15px rgba(108, 99, 255, 0.3);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(30,111,92,0.4);
+      background: #5750d9;
+      box-shadow: 0 8px 20px rgba(108, 99, 255, 0.5);
     }
 
     /* HERO */
     .hero {
       padding: 60px 0 40px;
-      background: linear-gradient(145deg, #eef5f9 0%, #ffffff 100%);
+      background: transparent;
     }
     .hero-grid {
       display: flex;
@@ -90,18 +91,17 @@
     .hero-text h1 {
       font-size: 3rem;
       font-weight: 800;
-      background: linear-gradient(120deg, #134b5e, #2b8c6e);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #ffffff;
     }
     .hero-badge {
-      background: #d9f0ec;
+      background: rgba(108, 99, 255, 0.15);
+      color: #8c85ff;
       display: inline-block;
       padding: 6px 14px;
       border-radius: 30px;
       font-size: 0.85rem;
       font-weight: 600;
+      border: 1px solid rgba(108, 99, 255, 0.3);
     }
 
     /* SECTION TITLE */
@@ -110,12 +110,13 @@
       font-weight: 700;
       margin-bottom: 2rem;
       text-align: center;
+      color: #ffffff;
     }
     .section-title:after {
       content: '';
       width: 70px;
       height: 4px;
-      background: #2c8e6e;
+      background: #6c63ff;
       display: block;
       margin: 12px auto 0;
       border-radius: 4px;
@@ -128,62 +129,64 @@
       gap: 24px;
       margin: 40px 0;
     }
-    .tool-item {
-      background: white;
+    .tool-item, .step-card {
+      background: #151520;
       border-radius: 28px;
       padding: 24px 16px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-      border: 1px solid #e0efe8;
+      border: 1px solid #2a2a35;
     }
-    .tool-item:hover {
+    .tool-item:hover, .step-card:hover {
       transform: translateY(-8px);
-      border-color: #2c8e6e;
-      box-shadow: 0 20px 35px -12px rgba(30,111,92,0.3);
+      border-color: #6c63ff;
+      box-shadow: 0 15px 30px rgba(108, 99, 255, 0.15);
     }
-    .tool-icon { font-size: 2.8rem; color: #2c8e6e; margin-bottom: 12px; }
-    .tool-name { font-weight: 800; font-size: 1.2rem; margin: 8px 0; }
-    .tool-item small { color: #6b8b7c; font-size: 0.75rem; }
+    .tool-icon { font-size: 2.8rem; color: #6c63ff; margin-bottom: 12px; }
+    .tool-name { font-weight: 800; font-size: 1.2rem; margin: 8px 0; color: #fff; }
+    .tool-item small { color: #8c8ca1; font-size: 0.75rem; }
 
     /* BILL PANEL */
     .bill-panel {
-      background: white;
-      border-radius: 40px;
+      background: #181824;
+      border-radius: 32px;
       padding: 35px;
       margin: 40px 0;
-      box-shadow: 0 25px 45px rgba(0,0,0,0.1);
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+      border: 1px solid #2a2a35;
     }
 
     .form-row { display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 24px; }
     .input-group { flex: 1; min-width: 180px; }
-    .input-group label { font-weight: 700; display: block; margin-bottom: 8px; color: #1e5a4a; }
+    .input-group label { font-weight: 600; display: block; margin-bottom: 8px; color: #a5a5b8; }
     input {
       width: 100%;
       padding: 12px 18px;
-      border-radius: 28px;
-      border: 1.5px solid #d0e2da;
+      border-radius: 12px;
+      border: 1px solid #333344;
+      background: #0a0a0f;
+      color: #ffffff;
       font-family: inherit;
       transition: 0.2s;
     }
     input:focus {
-      border-color: #1e6f5c;
+      border-color: #6c63ff;
       outline: none;
-      box-shadow: 0 0 0 3px rgba(30,111,92,0.1);
+      box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.2);
     }
 
     /* TABLE */
     .bill-table-wrapper {
       overflow-x: auto;
       margin: 25px 0;
-      border-radius: 24px;
-      border: 1px solid #e2f0ea;
+      border-radius: 16px;
+      border: 1px solid #2a2a35;
     }
     .bill-table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
     .bill-table th {
-      background: #1e6f5c;
-      color: white;
+      background: #20202e;
+      color: #ffffff;
       padding: 14px 12px;
       font-weight: 600;
       text-align: center;
@@ -191,50 +194,51 @@
     .bill-table td {
       padding: 12px 10px;
       text-align: center;
-      border-bottom: 1px solid #e2f0ea;
+      border-bottom: 1px solid #2a2a35;
     }
     .bill-table input {
       width: 100%;
       min-width: 80px;
       padding: 8px 10px;
-      border-radius: 20px;
-      border: 1px solid #cbdcd4;
+      border-radius: 8px;
+      border: 1px solid #333344;
+      background: #151520;
+      color: white;
       text-align: center;
     }
     .remove-row-btn {
-      background: #ff6b6b;
-      border: none;
-      color: white;
+      background: rgba(255, 75, 75, 0.1);
+      border: 1px solid #ff4b4b;
+      color: #ff4b4b;
       padding: 6px 14px;
-      border-radius: 30px;
+      border-radius: 8px;
       cursor: pointer;
-      font-size: 0.8rem;
+      font-size: 0.9rem;
       transition: 0.2s;
     }
-    .remove-row-btn:hover { background: #ff5252; transform: scale(0.95); }
+    .remove-row-btn:hover { background: #ff4b4b; color: white; }
     .add-row-btn {
-      background: #eef3f0;
-      border: 2px dashed #2c8e6e;
+      background: rgba(108, 99, 255, 0.1);
+      border: 2px dashed #6c63ff;
+      color: #8c85ff;
       padding: 12px 24px;
-      border-radius: 40px;
+      border-radius: 12px;
       cursor: pointer;
       font-weight: 600;
       margin-top: 15px;
       width: 100%;
       transition: 0.2s;
-      font-family: inherit;
       font-size: 1rem;
     }
-    .add-row-btn:hover { background: #e0f0e8; border-color: #1e6f5c; }
+    .add-row-btn:hover { background: rgba(108, 99, 255, 0.2); border-color: #8c85ff; color: #fff; }
 
     /* LIVE BILL PREVIEW */
     .live-bill-preview {
-      background: #fefef7;
-      border-radius: 28px;
+      background: #0f0f16;
+      border-radius: 20px;
       padding: 25px;
       margin-top: 30px;
-      border: 2px solid #cde3db;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      border: 1px solid #2a2a35;
     }
     .preview-header {
       display: flex;
@@ -242,112 +246,126 @@
       align-items: center;
       flex-wrap: wrap;
       gap: 12px;
-      border-bottom: 2px dashed #2c8e6e;
+      border-bottom: 1px dashed #444;
       padding-bottom: 15px;
       margin-bottom: 20px;
     }
     .download-buttons { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
     .download-btn {
       color: white;
-      padding: 10px 18px;
-      border-radius: 32px;
+      padding: 10px 16px;
+      border-radius: 12px;
       border: none;
       font-weight: 700;
       cursor: pointer;
       transition: 0.2s;
       font-size: 0.88rem;
-    }
-    .download-btn.pdf { background: linear-gradient(135deg, #e74c3c, #c0392b); }
-    .download-btn.png { background: linear-gradient(135deg, #27ae60, #1e8449); }
-    .download-btn.jpg { background: linear-gradient(135deg, #f39c12, #d68910); }
-
-    /* ✅ PRINT BUTTON - Naya */
-    .download-btn.print {
-      background: linear-gradient(135deg, #6c3483, #a569bd);
-      font-size: 0.88rem;
       display: flex;
       align-items: center;
       gap: 6px;
-      animation: pulsePrint 2s infinite;
     }
-    @keyframes pulsePrint {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(108,52,131,0.4); }
-      50% { box-shadow: 0 0 0 8px rgba(108,52,131,0); }
+    
+    .download-btn.pdf { background: #ff4757; }
+    .download-btn.png { background: #2ed573; }
+    .download-btn.jpg { background: #ffa502; }
+    .download-btn.print { background: #3742fa; }
+    
+    /* 🔥 POWERFUL WHATSAPP BUTTON */
+    .download-btn.whatsapp {
+      background: #25D366; 
+      color: white;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      animation: pulseWA 2s infinite;
     }
 
-    .download-btn:hover { transform: translateY(-2px); filter: brightness(1.1); }
-    .bill-content { font-family: 'Inter', monospace; background: white; padding: 20px; border-radius: 20px; }
+    @keyframes pulseWA {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5); }
+      50% { box-shadow: 0 0 0 8px rgba(37, 211, 102, 0); }
+    }
+
+    .download-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
+    
+    /* ACTUAL BILL PAPER (Must remain white for PDF generation) */
+    .bill-content { 
+      font-family: 'Inter', sans-serif; 
+      background: #ffffff; /* White background for real bill look */
+      color: #000000;      /* Black text for printing */
+      padding: 30px; 
+      border-radius: 12px; 
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 800px;
+      margin: 0 auto;
+    }
 
     /* PRINT SUCCESS TOAST */
     .print-toast {
       position: fixed;
       bottom: 30px;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: linear-gradient(135deg, #6c3483, #a569bd);
+      transform: translateX(-50%) translateY(150px);
+      background: #252535;
       color: white;
       padding: 14px 28px;
-      border-radius: 40px;
-      font-weight: 700;
+      border-radius: 12px;
+      border: 1px solid #444;
+      font-weight: 600;
       font-size: 1rem;
       z-index: 9999;
-      transition: transform 0.4s ease;
-      box-shadow: 0 8px 25px rgba(108,52,131,0.4);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
     }
     .print-toast.show { transform: translateX(-50%) translateY(0); }
 
     /* FOOTER */
     .footer-policies {
-      background: #0b2b2a;
-      color: white;
+      background: #050508;
+      color: #a5a5b8;
       padding: 35px 0 20px;
       margin-top: 60px;
+      border-top: 1px solid #2a2a35;
     }
     .policy-links { display: flex; gap: 30px; flex-wrap: wrap; justify-content: center; margin-bottom: 20px; }
-    .policy-links a { color: #bcd9d2; text-decoration: none; transition: 0.2s; }
+    .policy-links a { color: #8c85ff; text-decoration: none; transition: 0.2s; }
     .policy-links a:hover { color: white; }
-    .copyright { text-align: center; font-size: 0.8rem; opacity: 0.8; }
+    .copyright { text-align: center; font-size: 0.85rem; }
 
     .active-badge {
-      background: linear-gradient(135deg, #1e6f5c20, #2c8e6e20);
+      background: rgba(108, 99, 255, 0.15);
+      border: 1px solid rgba(108, 99, 255, 0.4);
       display: inline-block;
       padding: 8px 20px;
       border-radius: 40px;
       font-weight: 700;
-      color: #1e6f5c;
+      color: #8c85ff;
       font-size: 0.9rem;
     }
-    .step-card { transition: 0.2s; }
-    .step-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.08); }
 
     @media (max-width: 768px) {
-      .hero-text h1 { font-size: 2rem; }
-      .bill-table th, .bill-table td { font-size: 0.75rem; padding: 6px; }
+      .hero-text h1 { font-size: 2.2rem; }
+      .bill-table th, .bill-table td { font-size: 0.8rem; padding: 8px; }
       .bill-panel { padding: 20px; }
-      .download-buttons { justify-content: center; }
+      .download-buttons { justify-content: flex-start; }
       .preview-header { flex-direction: column; align-items: flex-start; }
+      .bill-content { padding: 15px; }
     }
   </style>
 </head>
 <body>
 
-<!-- PRINT TOAST NOTIFICATION -->
-<div class="print-toast" id="printToast">🖨️ प्रिंटर ढूंढ रहा है...</div>
+<!-- TOAST NOTIFICATION -->
+<div class="print-toast" id="printToast">⏳ प्रोसेस हो रहा है...</div>
 
 <nav class="navbar">
   <div class="nav-container">
-    <div class="logo"><i class="fas fa-file-invoice-dollar"></i> SmartBills<span style="color:#1e6f5c;">.Pro</span></div>
+    <div class="logo"><i class="fas fa-file-invoice"></i> SmartBills<span>.Pro</span></div>
     <ul class="nav-links">
       <li><a onclick="document.getElementById('home').scrollIntoView({behavior:'smooth'})">Home</a></li>
-      <li><a href="onlineservicebill.html">Service Bill</a></li>
-      <li><a href="kiranastorebill.html">Kirana Bill</a></li>
-      <li><a href="Classesbill.html">Classes Bill</a></li>
-      <li><a href="Clothingbill.html">Clothing Bill</a></li>
-      <li><a href="Electronicbill.html">Electronic Bill</a></li>
-      <li><a href="Vegetablebill.html">Vegetable Bill</a></li>
+      <li><a onclick="document.getElementById('tools').scrollIntoView({behavior:'smooth'})">Templates</a></li>
       <li><a onclick="document.getElementById('about').scrollIntoView({behavior:'smooth'})">About</a></li>
     </ul>
-    <button class="btn-primary" id="scrollToBillBtn"><i class="fas fa-receipt"></i> बिल बनाएं</button>
+    <button class="btn-primary" onclick="document.getElementById('generatorSection').scrollIntoView({behavior:'smooth'})">
+      <i class="fas fa-plus"></i> बिल बनाएं
+    </button>
   </div>
 </nav>
 
@@ -356,54 +374,26 @@
   <section id="home" class="hero">
     <div class="container hero-grid">
       <div class="hero-text">
-        <span class="hero-badge"><i class="fas fa-bolt"></i> 100% FREE • टेबल में बिल • लाइव प्रीव्यू • One Click Print</span>
+        <span class="hero-badge"><i class="fas fa-moon"></i> डार्क थीम • PDF डायरेक्ट WhatsApp शेयर</span>
         <br><br>
-        <h1>टेबल फॉर्मेट में <br>प्रोफेशनल बिल बनाएं</h1>
+        <h1>प्रोफेशनल व्यापार <br><span style="color:#6c63ff;">इनवॉइस जनरेटर</span></h1>
         <br>
-        <p>किराना, कपड़े, क्लासेस, इलेक्ट्रॉनिक्स, वेजिटेबल और ऑनलाइन सेवा — मात्रा, कीमत के साथ लाइव बिल। PDF, PNG, JPG डाउनलोड और सीधे Print करें।</p>
+        <p style="color:#a5a5b8; font-size:1.1rem; line-height:1.6; max-width:500px;">
+          अब बिना झंझट के अपने बिज़नेस का बिल बनाएं। PDF, PNG डाउनलोड करें या <strong>सीधे WhatsApp पर फाइल के साथ शेयर करें</strong> (Direct File Attach Support)।
+        </p>
         <br>
         <div style="display:flex; gap:12px; flex-wrap:wrap;">
-          <button class="btn-primary" id="heroCtaBtn"><i class="fas fa-magic"></i> अभी बिल बनाएं</button>
-          <button class="btn-primary" onclick="printBillFromApp()" style="background:linear-gradient(135deg,#6c3483,#a569bd);"><i class="fas fa-print"></i> One Click Print</button>
+          <button class="btn-primary" onclick="document.getElementById('generatorSection').scrollIntoView({behavior:'smooth'})">
+            <i class="fas fa-magic"></i> अभी जनरेट करें
+          </button>
         </div>
-      </div>
-      <div class="hero-image" style="text-align:center;">
-        <i class="fas fa-table" style="font-size: 5rem; color:#1e6f5c;"></i>
-        <i class="fas fa-print" style="font-size: 3rem; margin-left: 15px; color:#6c3483;"></i>
       </div>
     </div>
   </section>
 
-  <!-- How to use -->
-  <div class="container" id="how-to-use">
-    <h2 class="section-title">📋 बिल कैसे बनाएं? लाइव टेबल अपडेट</h2>
-    <div class="tools-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); margin-bottom: 20px;">
-      <div class="step-card" style="background:white;border-radius:28px;padding:24px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-        <i class="fas fa-table" style="font-size:2rem;color:#1e6f5c;"></i>
-        <h3 style="margin:12px 0;">1. टेबल में आइटम</h3>
-        <p>मात्रा, कीमत डालें, ऑटो कैलकुलेशन</p>
-      </div>
-      <div class="step-card" style="background:white;border-radius:28px;padding:24px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-        <i class="fas fa-eye" style="font-size:2rem;color:#1e6f5c;"></i>
-        <h3 style="margin:12px 0;">2. लाइव प्रीव्यू</h3>
-        <p>नीचे बिल तुरंत अपडेट होता है</p>
-      </div>
-      <div class="step-card" style="background:white;border-radius:28px;padding:24px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-        <i class="fas fa-file-pdf" style="font-size:2rem;color:#e74c3c;"></i>
-        <h3 style="margin:12px 0;">3. Download करें</h3>
-        <p>PDF, PNG, JPG फॉर्मेट में सेव करें</p>
-      </div>
-      <div class="step-card" style="background:white;border-radius:28px;padding:24px;text-align:center;box-shadow:0 5px 15px rgba(0,0,0,0.05);">
-        <i class="fas fa-print" style="font-size:2rem;color:#6c3483;"></i>
-        <h3 style="margin:12px 0;">4. सीधे Print करें</h3>
-        <p>Nearby प्रिंटर से एक क्लिक में प्रिंट</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- बिल टूल्स ग्रिड -->
+  <!-- Templates Section -->
   <div class="container" id="tools">
-    <h2 class="section-title">🛒 सभी बिल टूल्स एक क्लिक में सेट</h2>
+    <h2 class="section-title">📦 रेडीमेड इनवॉइस टेम्प्लेट</h2>
     <div class="tools-grid" id="toolsGrid"></div>
   </div>
 
@@ -411,27 +401,27 @@
   <div class="container" id="generatorSection">
     <div class="bill-panel">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-bottom:20px;">
-        <h2><i class="fas fa-table-list"></i> टेबल बिल जनरेटर — लाइव अपडेट</h2>
-        <span class="active-badge" id="activeToolBadge"><i class="fas fa-store"></i> किराना / जनरल</span>
+        <h2 style="color:#fff;"><i class="fas fa-edit"></i> इनवॉइस डिटेल्स भरें</h2>
+        <span class="active-badge" id="activeToolBadge"><i class="fas fa-briefcase"></i> कस्टम व्यापार बिल</span>
       </div>
 
-      <!-- Business & customer details -->
+      <!-- Business Details -->
       <div class="form-row">
         <div class="input-group">
-          <label>🏢 व्यवसाय का नाम</label>
-          <input type="text" id="businessName" value="श्री राम जनरल स्टोर" placeholder="दुकान का नाम">
+          <label>🏢 कंपनी / दुकान का नाम</label>
+          <input type="text" id="businessName" value="टेक सॉल्यूशंस प्राइवेट लिमिटेड" placeholder="दुकान का नाम">
         </div>
         <div class="input-group">
           <label>👤 ग्राहक का नाम</label>
-          <input type="text" id="customerName" value="राहुल शर्मा" placeholder="ग्राहक नाम">
+          <input type="text" id="customerName" value="रवि कुमार" placeholder="ग्राहक का नाम">
         </div>
         <div class="input-group">
-          <label>📅 बिल तारीख</label>
+          <label>📅 इनवॉइस डेट</label>
           <input type="date" id="billDate">
         </div>
         <div class="input-group">
-          <label>🧾 बिल नंबर</label>
-          <input type="text" id="billNumber" value="INV-2501">
+          <label>🧾 इनवॉइस नंबर</label>
+          <input type="text" id="billNumber" value="INV-2026-01">
         </div>
       </div>
 
@@ -440,65 +430,64 @@
         <table class="bill-table" id="itemsTable">
           <thead>
             <tr>
-              <th>आइटम / उत्पाद</th>
+              <th style="text-align:left;">सर्विस / उत्पाद का नाम</th>
               <th>मात्रा (Qty)</th>
-              <th>मूल्य (₹)</th>
-              <th>कुल (₹)</th>
-              <th style="width:70px;"></th>
+              <th>दर (Rate ₹)</th>
+              <th>कुल (Total ₹)</th>
+              <th style="width:70px;">Action</th>
             </tr>
           </thead>
           <tbody id="tableBody"></tbody>
         </table>
       </div>
-      <button class="add-row-btn" id="addTableRowBtn"><i class="fas fa-plus-circle"></i> + नई पंक्ति जोड़ें</button>
+      <button class="add-row-btn" id="addTableRowBtn"><i class="fas fa-plus"></i> नया आइटम जोड़ें</button>
 
-      <!-- Extra Note & GST -->
-      <div class="form-row" style="margin-top:20px;">
+      <!-- Extras -->
+      <div class="form-row" style="margin-top:25px;">
         <div class="input-group">
-          <label>📝 अतिरिक्त नोट</label>
-          <input type="text" id="extraNote" value="GST 5% शामिल है | धन्यवाद !">
+          <label>📝 नियम व शर्तें (Note)</label>
+          <input type="text" id="extraNote" value="धन्यवाद! कृपया 7 दिनों के भीतर भुगतान करें।">
         </div>
         <div class="input-group">
-          <label>💸 GST %</label>
-          <input type="number" id="gstPercent" value="5" step="0.5" placeholder="GST %">
+          <label>💸 GST / टैक्स (%)</label>
+          <input type="number" id="gstPercent" value="18" step="0.5" placeholder="टैक्स %">
         </div>
       </div>
 
-      <!-- LIVE BILL PREVIEW + DOWNLOAD/PRINT BUTTONS -->
+      <!-- LIVE PREVIEW & DOWNLOADS -->
       <div class="live-bill-preview" id="livePreviewContainer">
         <div class="preview-header">
-          <h3><i class="fas fa-eye"></i> लाइव बिल प्रीव्यू</h3>
+          <h3 style="color:#fff;"><i class="fas fa-eye"></i> लाइव इनवॉइस प्रीव्यू</h3>
           <div class="download-buttons">
             <button class="download-btn pdf" id="downloadPDFBtn"><i class="fas fa-file-pdf"></i> PDF</button>
             <button class="download-btn png" id="downloadPNGBtn"><i class="fas fa-image"></i> PNG</button>
             <button class="download-btn jpg" id="downloadJPGBtn"><i class="fas fa-camera"></i> JPG</button>
-            <!-- ✅ ONE CLICK PRINT BUTTON -->
-            <button class="download-btn print" id="printBillBtn" onclick="printBillFromApp()">
-              <i class="fas fa-print"></i> One Click Print
+            <button class="download-btn print" id="printBillBtn" onclick="printBill()"><i class="fas fa-print"></i> Print</button>
+            
+            <!-- 🔥 ADVANCED WHATSAPP SHARE BUTTON -->
+            <button class="download-btn whatsapp" id="shareWhatsAppBtn">
+              <i class="fab fa-whatsapp" style="font-size:1.1rem;"></i> Share PDF
             </button>
           </div>
         </div>
+        
+        <!-- WHITE BACKGROUND PAPER FOR BILL EXPORT -->
         <div id="billPreviewContent" class="bill-content">
-          <div style="text-align:center;padding:20px;">बिल लोड हो रहा है...</div>
+          <div style="text-align:center;padding:20px;color:#000;">बिल लोड हो रहा है...</div>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- About -->
+  <!-- About App -->
   <div class="container" id="about" style="margin:30px auto;">
-    <div style="background:#fff;border-radius:32px;padding:32px;">
-      <h2><i class="fas fa-address-card"></i> About Us</h2>
-      <p style="margin-top:12px;">SmartBills.Pro पूरी तरह से मुफ्त प्लेटफॉर्म है। टेबल आधारित बिलिंग, लाइव अपडेट, मल्टी-फॉर्मेट डाउनलोड (PDF/PNG/JPG) और <strong>One Click Print</strong> फीचर के साथ। कोई साइनअप नहीं, तुरंत बिल जनरेट करें।</p>
-    </div>
-  </div>
-
-  <!-- Contact -->
-  <div class="container" id="contact" style="margin-bottom:40px;">
-    <div style="background:#fff;border-radius:32px;padding:32px;">
-      <h2><i class="fas fa-envelope"></i> Contact</h2>
-      <p style="margin-top:12px;">Email: support@smartbills.pro | WhatsApp: +91-98765-43210</p>
+    <div style="background:#181824;border-radius:24px;padding:32px; border:1px solid #2a2a35;">
+      <h2 style="color:#fff;"><i class="fas fa-shield-alt"></i> सुरक्षित और नेटिव</h2>
+      <p style="margin-top:12px; color:#a5a5b8; line-height:1.6;">
+        यह ऐप <strong>Android WebView</strong> और Chrome ब्राउज़र के लिए पूरी तरह से ऑप्टिमाइज़्ड है। <br>
+        डायरेक्ट <strong>WhatsApp Share PDF</strong> का इस्तेमाल करता है। यदि ब्राउज़र में शेयर सपोर्ट नहीं है, तो यह नेटिव <code>window.Android.saveBlob</code> और <code>Intent URL Scheme</code> के ज़रिए काम करता है जिससे ERR_UNKNOWN_URL_SCHEME की समस्या नहीं आती।
+      </p>
     </div>
   </div>
 </main>
@@ -507,15 +496,14 @@
   <div class="container policy-links">
     <a href="#">Privacy Policy</a>
     <a href="#">Terms of Service</a>
-    <a href="#">Refund Policy</a>
-    <a href="#">Cancellation Policy</a>
+    <a href="#">WebView Integration</a>
   </div>
-  <div class="container copyright">© 2025 SmartBills.Pro | सभी टूल्स 100% फ्री | PDF / PNG / JPG / Print सपोर्ट | टेबल व्यू बिलिंग</div>
+  <div class="container copyright">© 2026 SmartBills.Pro | Dark Theme Native UI | Built for WebViews</div>
 </footer>
 
 <script>
   // ================================================
-  // TABLE LOGIC & LIVE UPDATE
+  // TABLE & CALCULATION LOGIC
   // ================================================
   const tableBody = document.getElementById("tableBody");
   const businessInput = document.getElementById("businessName");
@@ -526,13 +514,13 @@
   const gstPercentInput = document.getElementById("gstPercent");
   const previewDiv = document.getElementById("billPreviewContent");
 
-  // Today's date default
+  // Default Date
   billDateInput.value = new Date().toISOString().slice(0,10);
 
-  let defaultItems = [
-    { name: "चावल बासमती", qty: 2, price: 85 },
-    { name: "दूध 1 लीटर", qty: 3, price: 60 },
-    { name: "साबुन बार", qty: 4, price: 45 }
+  let defaultItems =[
+    { name: "वेबसाइट डेवलपमेंट", qty: 1, price: 15000 },
+    { name: "SEO सर्विसेस (मासिक)", qty: 1, price: 5000 },
+    { name: "सर्वर होस्टिंग", qty: 1, price: 2500 }
   ];
 
   function renderTableRows() {
@@ -540,11 +528,11 @@
     defaultItems.forEach((item, idx) => {
       const row = document.createElement("tr");
       row.innerHTML = `
-        <td><input type="text" class="item-name-input" value="${escapeHtml(item.name)}" data-idx="${idx}" style="min-width:140px;"></td>
+        <td style="text-align:left;"><input type="text" class="item-name-input" value="${escapeHtml(item.name)}" data-idx="${idx}" style="min-width:180px; text-align:left;"></td>
         <td><input type="number" class="item-qty-input" value="${item.qty}" step="0.5" data-idx="${idx}"></td>
         <td><input type="number" class="item-price-input" value="${item.price}" step="1" data-idx="${idx}"></td>
-        <td class="item-total">₹${(item.qty * item.price).toFixed(2)}</td>
-        <td><button class="remove-row-btn" data-idx="${idx}"><i class="fas fa-trash-alt"></i></button></td>
+        <td class="item-total" style="font-weight:600;">₹${(item.qty * item.price).toFixed(2)}</td>
+        <td><button class="remove-row-btn" data-idx="${idx}"><i class="fas fa-trash"></i></button></td>
       `;
       tableBody.appendChild(row);
     });
@@ -553,13 +541,7 @@
   }
 
   function attachTableEvents() {
-    document.querySelectorAll(".item-name-input").forEach(inp => {
-      inp.addEventListener("input", handleItemChange);
-    });
-    document.querySelectorAll(".item-qty-input").forEach(inp => {
-      inp.addEventListener("input", handleItemChange);
-    });
-    document.querySelectorAll(".item-price-input").forEach(inp => {
+    document.querySelectorAll(".item-name-input, .item-qty-input, .item-price-input").forEach(inp => {
       inp.addEventListener("input", handleItemChange);
     });
     document.querySelectorAll(".remove-row-btn").forEach(btn => {
@@ -573,14 +555,11 @@
       const nameInput = document.querySelector(`.item-name-input[data-idx='${idx}']`);
       const qtyInput  = document.querySelector(`.item-qty-input[data-idx='${idx}']`);
       const priceInput = document.querySelector(`.item-price-input[data-idx='${idx}']`);
-      if (nameInput && qtyInput && priceInput) {
-        defaultItems[idx].name  = nameInput.value;
-        defaultItems[idx].qty   = parseFloat(qtyInput.value) || 0;
-        defaultItems[idx].price = parseFloat(priceInput.value) || 0;
-      }
+      defaultItems[idx].name  = nameInput.value;
+      defaultItems[idx].qty   = parseFloat(qtyInput.value) || 0;
+      defaultItems[idx].price = parseFloat(priceInput.value) || 0;
     }
-    updateTotalsInTable();
-    updateLiveBill();
+    renderTableRows(); // Re-render to update totals instantly
   }
 
   function handleRemoveRow(e) {
@@ -589,17 +568,6 @@
       defaultItems.splice(parseInt(idx), 1);
       renderTableRows();
     }
-  }
-
-  function updateTotalsInTable() {
-    const rows = tableBody.querySelectorAll("tr");
-    rows.forEach((row, idx) => {
-      if (defaultItems[idx]) {
-        const totalCell = row.querySelector(".item-total");
-        const totalAmt = defaultItems[idx].qty * defaultItems[idx].price;
-        if (totalCell) totalCell.innerText = `₹${totalAmt.toFixed(2)}`;
-      }
-    });
   }
 
   function getCurrentBillData() {
@@ -621,101 +589,110 @@
   }
 
   function updateLiveBill() {
-    const business = businessInput.value || "बिजनेस";
+    const business = businessInput.value || "कंपनी का नाम";
     const customer = customerInput.value || "ग्राहक";
-    const date = billDateInput.value || new Date().toISOString().slice(0,10);
+    const date = billDateInput.value || "DD-MM-YYYY";
     const billNo = billNumberInput.value || "NA";
     const extraNote = extraNoteInput.value || "";
     const { items, subtotal, gstPercent, gstAmount, grandTotal } = getCurrentBillData();
 
     let itemsHtml = `
-      <table style="width:100%;border-collapse:collapse;margin:15px 0;">
+      <table style="width:100%;border-collapse:collapse;margin:25px 0;font-size:0.95rem;">
         <thead>
-          <tr style="background:#1e6f5c;color:white;">
-            <th style="padding:10px;text-align:left;">आइटम</th>
-            <th style="padding:10px;">मात्रा</th>
-            <th style="padding:10px;">मूल्य (₹)</th>
-            <th style="padding:10px;">कुल</th>
+          <tr style="background:#6c63ff;color:#ffffff;">
+            <th style="padding:12px;text-align:left;border:1px solid #e0e0e0;">विवरण (Description)</th>
+            <th style="padding:12px;border:1px solid #e0e0e0;">मात्रा</th>
+            <th style="padding:12px;border:1px solid #e0e0e0;">दर (₹)</th>
+            <th style="padding:12px;border:1px solid #e0e0e0;">कुल (₹)</th>
           </tr>
         </thead>
         <tbody>`;
+    
     items.forEach(it => {
       itemsHtml += `
           <tr>
-            <td style="padding:8px;border-bottom:1px solid #ddd;text-align:left;">${it.name}</td>
-            <td style="padding:8px;border-bottom:1px solid #ddd;text-align:center;">${it.quantity}</td>
-            <td style="padding:8px;border-bottom:1px solid #ddd;text-align:center;">₹${it.price.toFixed(2)}</td>
-            <td style="padding:8px;border-bottom:1px solid #ddd;text-align:center;">₹${it.total.toFixed(2)}</td>
+            <td style="padding:10px;border:1px solid #e0e0e0;text-align:left;color:#000;">${it.name}</td>
+            <td style="padding:10px;border:1px solid #e0e0e0;text-align:center;color:#000;">${it.quantity}</td>
+            <td style="padding:10px;border:1px solid #e0e0e0;text-align:center;color:#000;">₹${it.price.toFixed(2)}</td>
+            <td style="padding:10px;border:1px solid #e0e0e0;text-align:center;color:#000;font-weight:600;">₹${it.total.toFixed(2)}</td>
           </tr>`;
     });
     itemsHtml += `</tbody></table>`;
 
     const billHtml = `
-      <div style="max-width:100%;font-family:Arial,sans-serif;">
-        <div style="text-align:center;border-bottom:2px dashed #2c8e6e;margin-bottom:15px;padding-bottom:12px;">
-          <h2 style="color:#1e6f5c;margin-bottom:6px;">${business}</h2>
-          <p style="font-size:0.9rem;">📄 बिल नं: <strong>${billNo}</strong> &nbsp;|&nbsp; 📅 ${date}</p>
-          <p style="font-size:0.9rem;">👤 ग्राहक: <strong>${customer}</strong></p>
+      <div style="text-align:center;border-bottom:2px solid #6c63ff;padding-bottom:15px;margin-bottom:20px;">
+        <h1 style="color:#6c63ff;margin-bottom:8px;font-size:2.2rem;letter-spacing:1px;">${business}</h1>
+        <p style="color:#333;font-size:0.95rem;"><strong>INVOICE</strong></p>
+      </div>
+      
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;margin-bottom:20px;color:#000;">
+        <div>
+          <p style="margin-bottom:5px;color:#555;">To / ग्राहक:</p>
+          <h3 style="color:#000;">${customer}</h3>
         </div>
-        ${itemsHtml}
-        <div style="text-align:right;margin-top:15px;padding-top:10px;">
-          <div style="font-size:0.95rem;">उप-कुल: <strong>₹${subtotal.toFixed(2)}</strong></div>
-          ${gstPercent > 0 ? `<div style="font-size:0.95rem;color:#c0392b;">GST (${gstPercent}%): ₹${gstAmount.toFixed(2)}</div>` : ''}
-          <div style="font-size:1.4rem;font-weight:800;border-top:2px solid #1e6f5c;margin-top:10px;padding-top:10px;color:#1e6f5c;">
-            💰 कुल भुगतान: ₹${grandTotal.toFixed(2)}
+        <div style="text-align:right;">
+          <p style="margin-bottom:5px;"><strong>इनवॉइस नं:</strong> ${billNo}</p>
+          <p><strong>दिनांक:</strong> ${date}</p>
+        </div>
+      </div>
+      
+      ${itemsHtml}
+      
+      <div style="display:flex;justify-content:flex-end;margin-top:20px;color:#000;">
+        <div style="width:300px;border:1px solid #e0e0e0;border-radius:8px;padding:15px;background:#f9f9fb;">
+          <div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:1rem;">
+            <span>उप-कुल (Subtotal):</span>
+            <strong>₹${subtotal.toFixed(2)}</strong>
           </div>
-          <div style="margin-top:12px;font-size:0.85rem;color:#555;">📝 ${extraNote}</div>
-          <div style="margin-top:10px;font-size:0.7rem;color:#6b8b7c;">✨ SmartBills.Pro — मुफ्त बिल जनरेटर</div>
+          ${gstPercent > 0 ? `
+          <div style="display:flex;justify-content:space-between;margin-bottom:10px;font-size:1rem;color:#d35400;">
+            <span>टैक्स (${gstPercent}%):</span>
+            <strong>₹${gstAmount.toFixed(2)}</strong>
+          </div>` : ''}
+          <div style="display:flex;justify-content:space-between;margin-top:15px;padding-top:15px;border-top:2px dashed #ccc;font-size:1.4rem;color:#6c63ff;font-weight:800;">
+            <span>कुल भुगतान:</span>
+            <span>₹${grandTotal.toFixed(2)}</span>
+          </div>
         </div>
+      </div>
+      
+      <div style="margin-top:30px;font-size:0.9rem;color:#555;border-top:1px solid #eee;padding-top:15px;">
+        <strong>Note:</strong> ${extraNote}
+      </div>
+      <div style="margin-top:15px;text-align:center;font-size:0.75rem;color:#aaa;">
+        Generated via SmartBills.Pro
       </div>
     `;
     previewDiv.innerHTML = billHtml;
   }
 
-  // Add new row
   document.getElementById("addTableRowBtn").addEventListener("click", () => {
-    defaultItems.push({ name: "नया आइटम", qty: 1, price: 100 });
+    defaultItems.push({ name: "", qty: 1, price: 0 });
     renderTableRows();
   });
 
-  // Live update on field change
   [businessInput, customerInput, billDateInput, billNumberInput, extraNoteInput, gstPercentInput].forEach(field => {
-    field.addEventListener("input", () => updateLiveBill());
+    field.addEventListener("input", updateLiveBill);
   });
 
   // ================================================
-  // TOOLS GRID
+  // TEMPLATES
   // ================================================
-  const billTools = [
+  const billTools =[
     {
       name: "Online Service Bill", icon: "fas fa-laptop-code",
-      items: [{name:"वेबसाइट डिजाइन",qty:1,price:1500},{name:"होस्टिंग",qty:1,price:800},{name:"SEO ऑप्टिमाइजेशन",qty:1,price:1200}],
-      businessName: "WebWise Services Pvt Ltd"
+      items:[{name:"Website Creation",qty:1,price:25000},{name:"Domain & Hosting",qty:1,price:3500},{name:"AMC",qty:1,price:5000}],
+      businessName: "WebTech Agency"
     },
     {
-      name: "Kirana Store Bill", icon: "fas fa-shopping-basket",
-      items: [{name:"आटा 5kg",qty:2,price:220},{name:"चीनी 2kg",qty:1,price:80},{name:"दाल तूर",qty:1,price:120}],
-      businessName: "श्री किराना भंडार"
+      name: "General Store / Kirana", icon: "fas fa-shopping-cart",
+      items:[{name:"आटा 10kg",qty:1,price:450},{name:"रिफाइंड तेल 5L",qty:1,price:600},{name:"चीनी 5kg",qty:1,price:200}],
+      businessName: "सुपर मार्ट जनरल स्टोर"
     },
     {
-      name: "Classes Bill", icon: "fas fa-chalkboard",
-      items: [{name:"मासिक ट्यूशन फीस",qty:1,price:1500},{name:"स्टडी मटेरियल",qty:1,price:400},{name:"टेस्ट सीरीज",qty:1,price:300}],
-      businessName: "आदर्श कोचिंग सेंटर"
-    },
-    {
-      name: "Clothing Bill", icon: "fas fa-tshirt",
-      items: [{name:"कुर्ता",qty:2,price:650},{name:"जींस",qty:1,price:1200},{name:"शर्ट",qty:1,price:899}],
-      businessName: "फैशन हब कपड़े"
-    },
-    {
-      name: "Electronic Store Bill", icon: "fas fa-microchip",
-      items: [{name:"USB केबल",qty:2,price:250},{name:"ब्लूटूथ स्पीकर",qty:1,price:1899},{name:"मोबाइल चार्जर",qty:1,price:399}],
-      businessName: "टेक जोन इलेक्ट्रॉनिक्स"
-    },
-    {
-      name: "Vegetable Bill", icon: "fas fa-carrot",
-      items: [{name:"टमाटर kg",qty:2,price:40},{name:"प्याज kg",qty:1.5,price:35},{name:"आलू kg",qty:3,price:30}],
-      businessName: "ताजा सब्जी स्टोर"
+      name: "Mobile & Electronics", icon: "fas fa-mobile-alt",
+      items:[{name:"Samsung Galaxy S23",qty:1,price:74999},{name:"Fast Charger 25W",qty:1,price:1200},{name:"Back Cover",qty:1,price:499}],
+      businessName: "डिजिटल गैलेक्सी मोबाइल"
     }
   ];
 
@@ -726,143 +703,156 @@
     div.innerHTML = `
       <div class="tool-icon"><i class="${tool.icon}"></i></div>
       <div class="tool-name">${tool.name}</div>
-      <small>✨ क्लिक करें और बिल सेट करें</small>
+      <small>ऑटो-फिल टेम्प्लेट</small>
     `;
     div.addEventListener("click", () => {
       businessInput.value = tool.businessName;
       defaultItems = JSON.parse(JSON.stringify(tool.items));
       renderTableRows();
       document.getElementById("activeToolBadge").innerHTML = `<i class="${tool.icon}"></i> ${tool.name}`;
-      updateLiveBill();
       document.getElementById("generatorSection").scrollIntoView({ behavior: "smooth" });
     });
     toolsGridDiv.appendChild(div);
   });
 
   // ================================================
-  // DOWNLOAD FUNCTIONS (PNG / JPG / PDF)
+  // EXPORT & DOWNLOAD HELPERS (WITH ANDROID WEBVIEW SUPPORT)
   // ================================================
-  async function captureBillElement() {
-    const element = document.getElementById("billPreviewContent");
-    if (!element) return null;
-    const originalBg = element.style.backgroundColor;
-    element.style.backgroundColor = "white";
-    const canvas = await html2canvas(element, {
-      scale: 2.5,
-      backgroundColor: "#ffffff",
-      logging: false
-    });
-    element.style.backgroundColor = originalBg;
-    return canvas;
-  }
-
-  document.getElementById("downloadPNGBtn").addEventListener("click", async () => {
-    const canvas = await captureBillElement();
-    if (canvas) {
-      const link = document.createElement("a");
-      link.download = "SmartBill.png";
-      link.href = canvas.toDataURL("image/png");
-      link.click();
-    } else alert("बिल कैप्चर नहीं हो सका");
-  });
-
-  document.getElementById("downloadJPGBtn").addEventListener("click", async () => {
-    const canvas = await captureBillElement();
-    if (canvas) {
-      const link = document.createElement("a");
-      link.download = "SmartBill.jpg";
-      link.href = canvas.toDataURL("image/jpeg", 0.95);
-      link.click();
-    }
-  });
-
-  document.getElementById("downloadPDFBtn").addEventListener("click", async () => {
-    const canvas = await captureBillElement();
-    if (canvas) {
-      const { jsPDF } = window.jspdf;
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const imgWidth = 190;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
-      pdf.save("SmartBill.pdf");
-    } else alert("PDF जनरेशन विफल");
-  });
-
-  // ================================================
-  // ✅ ONE CLICK PRINT FUNCTION
-  // ================================================
-  function printBillFromApp() {
-    const billContent = document.getElementById("billPreviewContent").innerHTML;
-    const business = businessInput.value || "SmartBills Pro";
-    const billNo = billNumberInput.value || "NA";
-    const date = billDateInput.value || new Date().toISOString().slice(0,10);
-
-    const fullHtml = `<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <title>SmartBill - ${business} - ${billNo}</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; margin: 0; color: #1a2c3e; }
-    table { width: 100%; border-collapse: collapse; margin: 10px 0; }
-    th { background: #1e6f5c; color: white; padding: 10px; text-align: center; }
-    td { padding: 8px; border-bottom: 1px solid #ddd; }
-    h2 { color: #1e6f5c; }
-    @media print {
-      body { margin: 0; padding: 15px; }
-      button { display: none !important; }
-    }
-  </style>
-</head>
-<body>
-  <div style="text-align:center;margin-bottom:10px;">
-    <small style="color:#888;">SmartBills.Pro — मुफ्त बिल जनरेटर</small>
-  </div>
-  ${billContent}
-  <div style="text-align:center;margin-top:20px;font-size:0.75rem;color:#aaa;border-top:1px dashed #ddd;padding-top:10px;">
-    Printed via SmartBills.Pro App &nbsp;|&nbsp; ${date}
-  </div>
-</body>
-</html>`;
-
-    // Android App mein print
-    if (window.Android && typeof window.Android.printBill === "function") {
-      showPrintToast("🖨️ प्रिंटर ढूंढ रहा है...");
-      window.Android.printBill(fullHtml);
-    } else {
-      // Browser fallback (website pe direct open hone par)
-      showPrintToast("🖨️ Print window खुल रहा है...");
-      const w = window.open('', '_blank');
-      if (w) {
-        w.document.write(fullHtml);
-        w.document.close();
-        setTimeout(() => { w.print(); }, 600);
-      } else {
-        alert("Pop-up block है। Browser settings में allow करें।");
-      }
-    }
-  }
-
-  // Print Toast Notification
-  function showPrintToast(msg) {
+  function showToast(msg) {
     const toast = document.getElementById("printToast");
     toast.textContent = msg;
     toast.classList.add("show");
-    setTimeout(() => { toast.classList.remove("show"); }, 3000);
+    setTimeout(() => { toast.classList.remove("show"); }, 3500);
   }
 
-  // Nav buttons
-  document.getElementById("scrollToBillBtn").addEventListener("click", () => {
-    document.getElementById("generatorSection").scrollIntoView({ behavior: "smooth" });
-  });
-  document.getElementById("heroCtaBtn").addEventListener("click", () => {
-    document.getElementById("generatorSection").scrollIntoView({ behavior: "smooth" });
+  async function captureBillElement() {
+    const element = document.getElementById("billPreviewContent");
+    if (!element) return null;
+    return await html2canvas(element, { scale: 2.5, backgroundColor: "#ffffff", useCORS: true, logging: false });
+  }
+
+  // WebView compatible download
+  function triggerDownload(blob, filename) {
+    if (window.Android && window.Android.saveBlob) {
+      // For Native Android WebView Bridge
+      const reader = new FileReader();
+      reader.readAsDataURL(blob);
+      reader.onloadend = function() {
+        const base64data = reader.result.split(',')[1];
+        window.Android.saveBlob(base64data, filename, blob.type);
+        showToast("✅ फाइल सेव हो गई (Android Native)");
+      }
+    } else {
+      // Standard Web Browser Download
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+      showToast("✅ डाउनलोड पूरा हुआ!");
+    }
+  }
+
+  document.getElementById("downloadPNGBtn").addEventListener("click", async () => {
+    showToast("📸 PNG बन रहा है...");
+    const canvas = await captureBillElement();
+    canvas.toBlob((blob) => triggerDownload(blob, "Invoice.png"), "image/png");
   });
 
+  document.getElementById("downloadJPGBtn").addEventListener("click", async () => {
+    showToast("📸 JPG बन रहा है...");
+    const canvas = await captureBillElement();
+    canvas.toBlob((blob) => triggerDownload(blob, "Invoice.jpg"), "image/jpeg", 0.95);
+  });
+
+  document.getElementById("downloadPDFBtn").addEventListener("click", async () => {
+    showToast("📄 PDF जनरेट हो रहा है...");
+    const canvas = await captureBillElement();
+    const { jsPDF } = window.jspdf;
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 190;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+    const pdfBlob = pdf.output("blob");
+    triggerDownload(pdfBlob, "Invoice.pdf");
+  });
+
+  function printBill() {
+    showToast("🖨️ प्रिंटर कनेक्ट हो रहा है...");
+    const printContent = document.getElementById("billPreviewContent").innerHTML;
+    const w = window.open('', '_blank');
+    if(w) {
+      w.document.write(`<html><head><title>Print Invoice</title></head><body style="margin:0;padding:20px;">${printContent}</body></html>`);
+      w.document.close();
+      setTimeout(() => { w.print(); w.close(); }, 500);
+    } else {
+      showToast("⚠️ पॉप-अप ब्लॉक है! कृपया अनुमति दें।");
+    }
+  }
+
   // ================================================
+  // 🔥 ADVANCED WHATSAPP SHARE (DIRECT PDF FILE ATTACH)
+  // ================================================
+  document.getElementById("shareWhatsAppBtn").addEventListener("click", async () => {
+    showToast("⏳ WhatsApp के लिए PDF तैयार हो रहा है...");
+    
+    // 1. Generate PDF
+    const canvas = await captureBillElement();
+    const { jsPDF } = window.jspdf;
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const imgWidth = 190;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    pdf.addImage(imgData, "PNG", 10, 10, imgWidth, imgHeight);
+    const pdfBlob = pdf.output("blob");
+
+    const fileName = `Invoice_${billNumberInput.value}.pdf`;
+    const shareMessage = `नमस्ते ${customerInput.value},\n\nआपका बिल/इनवॉइस (₹${getCurrentBillData().grandTotal.toFixed(2)}) इस संदेश के साथ संलग्न(Attached) है।\n\nधन्यवाद!\n${businessInput.value}`;
+
+    // 2. Check Modern Web Share API (Best for File sharing directly to WA)
+    const file = new File([pdfBlob], fileName, { type: "application/pdf" });
+    
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      try {
+        await navigator.share({
+          title: 'Invoice Bill',
+          text: shareMessage,
+          files: [file]
+        });
+        showToast("✅ शेयर मेनू खुल गया!");
+        return; // Success! Exit function.
+      } catch (err) {
+        console.log("Share cancelled or failed: ", err);
+      }
+    } 
+    
+    // 3. Fallback for Custom Android WebViews (Directly pass Base64 to Java/Kotlin Code)
+    if (window.Android && window.Android.sharePDFBase64) {
+      const reader = new FileReader();
+      reader.readAsDataURL(pdfBlob);
+      reader.onloadend = function() {
+        const base64data = reader.result.split(',')[1];
+        // WebView Client MUST have this @JavascriptInterface method to receive file and share to intent
+        window.Android.sharePDFBase64(base64data, fileName, shareMessage);
+        showToast("🚀 Android Native Share शुरू हुआ...");
+      }
+      return;
+    }
+
+    // 4. Last Resort: Intent URL for Text Only (Prevents ERR_UNKNOWN_URL_SCHEME crash)
+    showToast("⚠️ आपका ब्राउज़र फाइल शेयर सपोर्ट नहीं करता। केवल टेक्स्ट भेजा जा रहा है...");
+    setTimeout(() => {
+       // Using intent:// scheme guarantees Android system routes it to WhatsApp or Play Store, preventing WebView Crash
+       const intentUrl = `intent://send/?text=${encodeURIComponent(shareMessage)}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+       window.location.href = intentUrl;
+    }, 1500);
+  });
+
   // INIT
-  // ================================================
   renderTableRows();
 </script>
 </body>
